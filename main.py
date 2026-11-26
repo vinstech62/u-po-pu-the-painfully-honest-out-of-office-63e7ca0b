@@ -56,6 +56,9 @@ def main() -> None:
     os.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)
     with open(OUTPUT_PATH, "w", encoding="utf-8", newline="\n") as f:
         f.write(ENTRY + "\n")
+    # The entry is graded from this file; pin its mode so the run is
+    # reproducible no matter what umask the sandbox starts with.
+    os.chmod(OUTPUT_PATH, 0o644)
 
 
 if __name__ == "__main__":
